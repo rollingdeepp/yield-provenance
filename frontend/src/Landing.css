@@ -1,0 +1,133 @@
+/* yield-provenance landing — emerald glass, centered hero, distinct from token-unlock */
+.ypl {
+  --grn: #4ADE80;
+  --bg: #04140D;
+  --bg-2: #0a2018;
+  --ink: #E6FBF0;
+  --dim: #8FBFA8;
+  --line: #1c3a2c;
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+.ypl-aurora {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(900px 520px at 80% -10%, rgba(74, 222, 128, 0.14), transparent 60%),
+    radial-gradient(760px 480px at -8% 110%, rgba(34, 197, 160, 0.12), transparent 55%);
+}
+.ypl > * { position: relative; z-index: 1; }
+
+.ypl [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.ypl [data-reveal].in { opacity: 1; transform: none; }
+
+.ypl-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  width: min(1180px, 92vw); margin: 0 auto; padding: 1.3rem 0;
+}
+.ypl-brand { display: inline-flex; align-items: center; gap: .6rem; font-size: 1.02rem; letter-spacing: .06em; }
+.ypl-brand b { font-weight: 800; }
+.ypl-mark {
+  width: 22px; height: 22px; border-radius: 6px;
+  background: conic-gradient(from 210deg, var(--grn), #22c5a0, #04140D, var(--grn));
+  box-shadow: 0 0 22px rgba(74, 222, 128, .5);
+}
+
+.ypl-enter {
+  font: inherit; font-weight: 700; cursor: pointer;
+  color: #04140D; background: var(--grn); border: none; border-radius: 12px;
+  padding: .82rem 1.5rem; box-shadow: 0 0 34px rgba(74, 222, 128, .3);
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.ypl-enter:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(74, 222, 128, .48); }
+.ypl-enter.sm { padding: .5rem .9rem; font-size: .85rem; border-radius: 9px; }
+.ypl-ghost {
+  font: inherit; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block;
+  color: var(--ink); background: rgba(255,255,255,.03); border: 1px solid var(--line); border-radius: 12px;
+  padding: .82rem 1.4rem; backdrop-filter: blur(6px); transition: border-color .18s ease;
+}
+.ypl-ghost:hover { border-color: var(--grn); }
+.ypl-ghost.sm { padding: .5rem .9rem; font-size: .85rem; }
+
+/* ── Centered hero with full-bleed chart backdrop ── */
+.ypl-hero {
+  position: relative; overflow: hidden;
+  padding: clamp(3rem, 9vh, 7rem) 0 clamp(3rem, 8vh, 6rem);
+  border-bottom: 1px solid var(--line);
+}
+.ypl-hero-bg { position: absolute; inset: 0; z-index: 0; }
+.ypl-hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.1) brightness(.42) hue-rotate(-8deg); }
+.ypl-hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(circle at 50% 40%, rgba(4,20,13,.5), rgba(4,20,13,.9));
+}
+.ypl-hero-inner {
+  position: relative; z-index: 2; width: min(820px, 92vw); margin: 0 auto; text-align: center;
+}
+.ypl-kicker { display: inline-block; font-size: .76rem; letter-spacing: .24em; text-transform: uppercase; color: var(--grn); margin-bottom: 1.2rem; font-weight: 700; }
+.ypl-hero h1 { font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1.02; letter-spacing: -.03em; margin: 0 0 1.2rem; font-weight: 800; }
+.ypl-hero h1 em { font-style: normal; color: var(--grn); }
+.ypl-hero-inner p { font-size: clamp(1rem, 1.4vw, 1.18rem); line-height: 1.6; color: var(--dim); margin: 0 auto 1.8rem; max-width: 38rem; }
+.ypl-actions { display: flex; gap: .8rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
+
+.ypl-sumchip {
+  display: inline-flex; align-items: center; gap: .55rem;
+  font-family: ui-monospace, monospace; font-size: .74rem; letter-spacing: .04em;
+  background: rgba(4,20,13,.6); border: 1px solid var(--line); border-radius: 12px; padding: .6rem 1rem; backdrop-filter: blur(8px);
+}
+.ypl-sumchip span { color: var(--dim); font-size: .58rem; letter-spacing: .16em; }
+.ypl-sumchip b { color: var(--grn); font-size: 1rem; }
+.ypl-sumchip b.warn { color: #F5C84B; }
+.ypl-sumchip i { font-style: normal; color: var(--dim); }
+.ypl-sumchip .verdict { font-style: normal; color: #04140D; background: #F5C84B; border-radius: 6px; padding: .15rem .5rem; font-weight: 700; font-size: .64rem; letter-spacing: .1em; }
+
+/* ── Metrics strip ── */
+.ypl-metrics {
+  width: min(1100px, 92vw); margin: 0 auto; padding: clamp(2rem, 5vh, 3.5rem) 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: .9rem;
+}
+.ypl-metric { background: rgba(255,255,255,.025); border: 1px solid var(--line); border-radius: 14px; padding: 1.3rem 1.2rem; text-align: center; backdrop-filter: blur(6px); }
+.ypl-metric b { display: block; font-family: ui-monospace, monospace; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--grn); letter-spacing: -.01em; }
+.ypl-metric span { display: block; margin-top: .4rem; font-family: ui-monospace, monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+
+/* ── Split feature ── */
+.ypl-split {
+  width: min(1100px, 92vw); margin: 0 auto; padding: clamp(2.5rem, 6vh, 5rem) 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: center;
+  border-top: 1px solid var(--line);
+}
+.ypl-split-copy h2 { font-size: clamp(1.5rem, 3vw, 2.3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 1rem; font-weight: 800; }
+.ypl-split-copy p { font-size: 1.04rem; line-height: 1.6; color: var(--dim); margin: 0 0 1.5rem; }
+.ypl-split-art { margin: 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); position: relative; }
+.ypl-split-art img { width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; filter: saturate(1.06); }
+.ypl-split-art figcaption {
+  position: absolute; left: .8rem; bottom: .7rem; font-family: ui-monospace, monospace;
+  font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink);
+  background: rgba(4,20,13,.7); padding: .3rem .6rem; border-radius: 6px; backdrop-filter: blur(4px);
+}
+
+.ypl-how { width: min(1100px, 92vw); margin: 0 auto; padding: clamp(2.5rem, 6vh, 5rem) 0; border-top: 1px solid var(--line); }
+.ypl-eyebrow { display: block; font-size: .76rem; letter-spacing: .24em; text-transform: uppercase; color: var(--grn); margin-bottom: 1.6rem; font-weight: 700; }
+.ypl-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: .9rem; }
+.ypl-step { background: rgba(255,255,255,.025); border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem 1.1rem 1.4rem; backdrop-filter: blur(6px); }
+.ypl-step-n { font-family: ui-monospace, monospace; font-weight: 700; color: var(--grn); font-size: .8rem; letter-spacing: .1em; }
+.ypl-step h3 { font-size: 1rem; margin: .5rem 0 .4rem; font-weight: 700; }
+.ypl-step p { font-size: .85rem; line-height: 1.5; color: var(--dim); margin: 0; }
+.ypl-cta { margin-top: 1.8rem; text-align: center; }
+
+.ypl-foot {
+  width: min(1180px, 92vw); margin: 0 auto; padding: 2.6rem 0 3rem; border-top: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  font-family: ui-monospace, monospace; font-size: .8rem; color: var(--dim);
+}
+
+@media (max-width: 940px) {
+  .ypl-metrics { grid-template-columns: repeat(2, 1fr); }
+  .ypl-split { grid-template-columns: 1fr; }
+  .ypl-split-art { order: -1; }
+  .ypl-steps { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) { .ypl-steps { grid-template-columns: 1fr; } }
